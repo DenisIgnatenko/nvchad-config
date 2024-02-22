@@ -55,7 +55,7 @@ lspconfig.emmet_ls.setup {
   },
 }
 
-require('lspconfig').tsserver.setup({
+lspconfig.tsserver.setup({
     init_options = {
         preferences = {
             disableSuggestions = true,

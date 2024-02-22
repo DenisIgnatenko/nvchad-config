@@ -13,7 +13,20 @@ local plugins = {
   -- {
   --   "suy/vim-context-commentstring",
   --   lazy = false,
+  --
   -- },
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
+  {
+    "github/copilot.vim",
+    lazy = false,
+  },
+  {
+    "Exafunction/codeium.vim",
+    lazy = false,
+  },
   {
     "HiPhish/nvim-ts-rainbow2",
     lazy = false,
@@ -38,6 +51,18 @@ local plugins = {
   {
     "neoclide/coc.nvim",
     lazy = false,
+  },
+  {
+    "mlaursen/vim-react-snippets",
+    requires = {
+      "SirVer/ultisnips",
+      "honza/vim-snippets",
+      "neoclide/coc-snippets.nvim",
+    },
+    lazy = false,
+  },
+  {
+    "neoclide/coc-snippets",
   },
   {
     "aca/emmet-ls",
@@ -261,10 +286,6 @@ local plugins = {
       require("todo-comments").setup()
     end,
   }, -- To make a plugin not be loaded
-  {
-    "Exafunction/codeium.vim",
-    lazy = false,
-  },
   {
     "NvChad/nvim-colorizer.lua",
      enabled = true,

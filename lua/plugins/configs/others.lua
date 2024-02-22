@@ -23,6 +23,10 @@ M.blankline = {
 }
 
 M.luasnip = function(opts)
+  require("luasnip").filetype_extend("javascript", { "javascriptreact" })
+  require("luasnip").filetype_extend("javascript", { "html" })
+  require("luasnip").filetype_extend("javascript", { "typescript" })
+  require("luasnip").filetype_extend("javascript", { "typescriptreact" })
   require("luasnip").config.set_config(opts)
 
   -- vscode format

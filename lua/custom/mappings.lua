@@ -5,6 +5,11 @@ local M = {}
 M.general = {
   n = {
 
+    ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
+    ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
+    ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
+    ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
+
     ["<C-b>"] = {
       function()
         require("base46").toggle_transparency()
@@ -13,9 +18,10 @@ M.general = {
 
     ["<leader>w"] = { "<cmd>w<CR>", "Save" },
     ["<leader>ll"] = { "<cmd>TroubleToggle<CR>", "Open Trouble" },
+    ["<leader>lq"] = { "<cmd>TroubleToggle quickfix<CR>", "Open Trouble" },
     ["<leader>ft"] = { "<cmd>TodoTelescope<CR>", "Find Todo" },
     ["\\"] = { "<cmd>:vsplit <CR>", "Vertical split" },
-    ["<Esc>"] = { "<Esc>:w<CR>", "Save and exit insert mode" },
+    ["<Esc>"] = { "<Esc>:w!<CR>", "Save and exit insert mode" },
     ["<C-]>"] = {
       function()
         require("nvterm.terminal").toggle "vertical"
@@ -32,6 +38,7 @@ M.general = {
     ["n"] = {
       ":m +1<CR>",
     },
+
     ["<leader>tt"] = {
       function()
         require("neotest").run.run()
@@ -88,6 +95,14 @@ M.general = {
       ":CodeiumDisable<CR>",
       "Step over",
     },
+    ["<leader>xd"] = {
+      ":Copilot disable<CR>",
+      "Step over",
+    },
+    ["<leader>xe"] = {
+      ":Copilot enable<CR>",
+      "Step over",
+    },
     ["<leader>cc"] = {
       ":ChatGPT<CR>",
     },
@@ -123,9 +138,52 @@ M.general = {
     },
   },
 }
+
+
+
+local map = vim.keymap.set
+map("i", "<C-r>", "copilot#Accept('<CR>')", {noremap = true, silent = true, expr=true, replace_keycodes = false })
+map("n", "<C-;>", "<cmd>Lspsaga hover_doc<CR>", { silent = true, noremap = true, desc = 'LSP Hover' })
+-- map("n", "n", "<cmd>Lspsaga code_action<CR>", { silent = true, noremap = true, desc = 'LSP Code Action' })
+
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
+vim.b.copilot_enabled = true
+
 vim.keymap.set("i", "<C-g>", function()
   return vim.fn["codeium#Accept"]()
 end, { expr = true })
+
+vim.keymap.set("i", "<C-x>", function()
+  return vim.fn["codeium#Clear"]()
+end, { expr = true })
+
+
+-- vim.keymap.set("i", "<C-x>", function()
+--   return vim.fn["codeium#Clear"]()
+-- end, { expr = true })
+
+-- vim.keymap.set("i", "<C-b>", function()
+--   return vim.fn["codeium#Change"]()
+-- end, { expr = true })
+--
+-- next suggestion	codeium#CycleCompletions(1)	<M-]>
+vim.keymap.set("i", "<C-]>", function()
+  return vim.fn["codeium#CycleCompletions"](1)
+end, { expr = true })
+
+--
+-- prev suggestion	codeium#CycleCompletions(-1)	<M-[>
+-- vim.keymap.set("i", "<C-[>", function()
+--   return vim.fn["codeium#CycleCompletions"](-1)
+-- end, { expr = true })
+
+--
+-- prev suggestion	codeium#CycleCompletions(-1)	<M-[>
+-- vim.keymap.set("i", "<M-[>", function()
+--   return vim.fn["codeium#CycleCompletions"](-1)
+-- end, { expr = true })
 
 vim.cmd("command! -nargs=+ E Emmet <args>")
 -- Для нормального режима

@@ -12,6 +12,22 @@ local default_plugins = {
       require("base46").load_all_highlights()
     end,
   },
+  {
+    'nvimdev/lspsaga.nvim',
+    lazy = false,
+    config = function()
+        require('lspsaga').setup({
+      server_filetype_map = {
+        typescript = 'typescript',
+      }
+      })
+    end,
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter',
+        'nvim-tree/nvim-web-devicons',
+        'neovim/nvim-lspconfig',
+    }
+  },
 
   {
     "NvChad/ui",
@@ -154,7 +170,10 @@ local default_plugins = {
       {
         -- snippet plugin
         "L3MON4D3/LuaSnip",
+
         dependencies = "rafamadriz/friendly-snippets",
+
+
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
           require("plugins.configs.others").luasnip(opts)
@@ -182,8 +201,9 @@ local default_plugins = {
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
+      },
+      experimental = {
+        ghost_text = true
       },
     },
     opts = function()
@@ -272,6 +292,7 @@ if #config.plugins > 0 then
 end
 
 require("lazy").setup(default_plugins, config.lazy_nvim)
---
+-- require("plugins.configs.lspsaga_config")
+-- require('lspsaga').setup({})
 -- package.path = package.path .. ";/Users/iregent/.local/share/nvim/lazy/moveline.nvim"
 -- require('moveline')

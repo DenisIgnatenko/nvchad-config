@@ -10,6 +10,13 @@ M.override = {
     fg = "#313131",
     italic = true,
   },
+  CopilotSuggestion = {
+    fg = "#211A29",
+
+  },
+  CodeiumSuggestion = {
+    fg = "#211A29",
+  },
   DiffChange = {
     bg = "#464414",
     fg = "none",

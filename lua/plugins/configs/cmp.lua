@@ -11,6 +11,7 @@ local field_arrangement = {
 }
 
 local formatting_style = {
+  experimental = { ghost_text = true },
   -- default fields order i.e completion word + item.kind + item.kind icons
   fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
 
